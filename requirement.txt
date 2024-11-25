@@ -1,0 +1,25 @@
+Laravel Social Login : Facebook - Google - Github
+
+Bước 1 : Button (Link) => Click vào button => Redirect
+
+Bước 2 : Lấy thông tin từ Callback
+
++ Name
++ Email
++ Avatar
+
+Bước 3 : Kiểm tra thông tin có tồn tại trong bảng users - trường Email database bỏ phần unique check
+
++ Tồn tại => Tự động đăng nhập
+
++ Không tồn tại : Insert vào table users => Tự động đăng nhập
+
+Thiết kế Database
+
+- provider :
+    + Facebook
+    + Google
+    + Github
+    + Email
+
+- provider_id

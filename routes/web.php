@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Laravel\Socialite\Facades\Socialite;
+use App\Http\Controllers\Auth\LoginController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -29,30 +30,25 @@ Route::get('huong-dan-xoa-du-lieu', function () {
         return '<h1>Hướng dẫn xoá dữ liệu</h1>';
 });
 
-Route::get('auth/facebook/callback', function () {
-    $user = Socialite::driver('facebook')->user();
-    dd($user);
-});
+Route::get('auth/facebook/callback', [LoginController::class,'facebookCallback']);
 
 Route::get('auth/facebook', function () {
     return Socialite::driver('facebook')->redirect();
-});
+})->name('auth.facebook');
 
 Route::get('auth/google', function () {
     return Socialite::driver('google')->redirect();
-});
+})->name('auth.google');
 
-Route::get('/auth/google/callback', function () {
-     $user = Socialite::driver('google')->user();
-    dd($user);
-});
+Route::get('/auth/google/callback',[LoginController::class,'googleCallback']);
  
 Route::get('auth/github', function () {
      return Socialite::driver('github')->redirect();
-});
+})->name('auth.github');
         
-Route::get('/auth/github/callback', function () {
-      $user = Socialite::driver('github')->user();
-      dd($user);
-});
+Route::get('/auth/github/callback', [LoginController::class,'githubCallback']);
             
+
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
